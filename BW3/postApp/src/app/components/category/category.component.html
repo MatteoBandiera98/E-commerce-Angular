@@ -1,0 +1,6 @@
+<div class="container" *ngIf="isloaded">
+    <h2>{{category}}</h2>
+    <div class="row">
+        <app-card *ngFor="let item of products" [maxChar]="50" class="col-3" [item]="item"></app-card>
+    </div>
+</div>

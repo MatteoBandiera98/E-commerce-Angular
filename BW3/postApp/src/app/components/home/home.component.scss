@@ -1,0 +1,17 @@
+.jumbo2{
+    background-color: #F9F9F9;
+
+}
+
+button{
+    width: 80px;
+    height: 80px;
+}
+
+.brand {
+    transition: box-shadow 0.3s ease; /* Aggiunge un effetto di transizione */
+}
+
+.brand:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Aggiunge l'ombra quando passi sopra */
+}

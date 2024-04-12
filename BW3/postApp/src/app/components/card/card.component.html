@@ -1,0 +1,52 @@
+<div class="card border-1">
+  <div
+    class="bg-image hover-overlay text-center"
+    data-mdb-ripple-init
+    data-mdb-ripple-color="light"
+  >
+    <img
+      src="{{item.imgUrl}}"
+      class="img-fluid"
+      [ngStyle]="maxChar == 50 ? { 'max-height': '160px'} : { 'max-height': '356px'}"
+    />
+  </div>
+  <div class="card-body p-2">
+    <div>
+      <p class="card-text" style="font-size: 0.9em; height: 70px;">
+        {{item.title | slice: 0 : maxChar}}{{item.title.length >= maxChar ? '...': ''}}
+      </p>
+    </div>
+    <div class="d-flex flex-row align-items-center gap-3 my-3">
+      <button
+        type="button"
+        class="btn btn-warning btn-floating"
+        data-mdb-ripple-init
+        [routerLink]="['/'+item.category.toLowerCase()+'/'+item.id]"
+      >
+      <i class="fa-solid fa-info"></i>
+      </button>
+      <div>
+        <p class="fw-bold m-0">€ {{item.price}}</p>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between pb-2">
+      <button
+        type="button"
+        class="btn btn-white btn-floating"
+        data-mdb-ripple-init
+        (click)="toggleFavorite()"
+      >
+        <i class="fas fa-heart" [ngClass]="item.favorite ? 'text-danger' : ''"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-white btn-floating"
+        data-mdb-ripple-init
+        (click)="addToCart()"
+      >
+        <i class="fas fa-cart-shopping"></i>
+      </button>
+    </div>
+  </div>
+</div>

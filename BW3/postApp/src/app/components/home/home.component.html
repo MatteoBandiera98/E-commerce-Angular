@@ -1,0 +1,192 @@
+<div *ngIf="isLoaded">
+    <div>
+        <mdb-carousel [controls]="false" [indicators]="false" [animation]="'fade'">
+            <mdb-carousel-item>
+                <img src="https://cdn-ak.f.st-hatena.com/images/fotolife/b/buutan0115/20240403/20240403103204.jpg" class="d-block" style="width: 100%; height: 80vh;" alt="immagine prova" />
+                <div class="mask" style="background-color: rgba(0, 0, 0, 0.1);"></div>
+                <div class="carousel-caption d-none d-md-block mb-5">
+                    <h1 class="text-center">Samsung AI</h1>
+                    <p>Goditi il nuovo Samsung con intelligenza artificiale</p>
+                    <a target="_blank" href="" rel="no-follow" class="btn btn-outline-warning btn-lg">Acquista il nuovo Samsung</a>
+                </div>
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <img src="https://static1.unieuro.it/medias/sys_master/root/h6c/h75/44974820360222/Unieuro-banner-2880x1436-galaxy-ai-aprile.webp" class="d-block" style="width: 100%; height: 80vh;" alt="immagine prova" />
+                <div class="mask" style="background-color: rgba(0, 0, 0, 0.1);"></div>
+                <div class="carousel-caption d-none d-md-block mb-5">
+                    <h1 class="text-center">Samsung AI</h1>
+                    <p>Goditi il nuovo Samsung con intelligenza artificiale</p>
+                    <a target="_blank" href="" rel="no-follow" class="btn btn-outline-warning btn-lg">Acquista il nuovo Samsung</a>
+                </div>
+            </mdb-carousel-item>
+        </mdb-carousel>
+    </div>
+    <!-- ALEXANDRU -->
+    <div class="container my-5">
+        <h2 class="py-5">Prodotti Stracciati</h2>
+        <mdb-carousel [controls]="false" [indicators]="true" [animation]="'slide'" [dark]="true">
+            <mdb-carousel-item>
+                <div class="row">
+                    <app-card *ngFor="let item of randomProducts | slice: 0:3" class="col-4" [item]="item"></app-card>
+                </div>
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <div class="row">
+                    <app-card *ngFor="let item of randomProducts | slice: 3:6" class="col-4" [item]="item"></app-card>
+                </div>
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <div class="row">
+                    <app-card *ngFor="let item of randomProducts | slice: 6:9" class="col-4" [item]="item"></app-card>
+                </div>
+            </mdb-carousel-item>
+        </mdb-carousel>
+    </div>
+    <!-- Fabio -->
+    <div class="container my-5">
+        <h2 class="py-5">Prodotti Popolari</h2>
+        <mdb-carousel [controls]="false" [indicators]="true" [animation]="'slide'" [dark]="true">
+            <mdb-carousel-item>
+                <div class="row">
+                    <app-card [maxChar]="50" *ngFor="let item of randomProducts | slice: 9:15" class="col-2" [item]="item"></app-card>
+                </div>
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <div class="row">
+                    <app-card [maxChar]="50" *ngFor="let item of randomProducts | slice: 15:21" class="col-2" [item]="item"></app-card>
+                </div>
+            </mdb-carousel-item>
+        </mdb-carousel>
+    </div>
+    <!--Jumbo2-->
+    <div class="container-fluid bg-body-secondary jumbo2 my-5">
+        <div class="row py-5">
+            <div class="col-6 g-0">
+                <div class="container w-75">
+                    <!-- Immagine del prodotto -->
+                    <img class="rounded-5 img-fluid shadow" [src]="currentProductImageUrl" alt="Product Image">
+                </div>
+            </div>
+            <div class="col-5">
+                <!-- Descrizioni dei prodotti -->
+                <div *ngIf="currentProductIndex === 0">
+                    <div class="w-75 mx-auto my-5">
+                        <h3 class="display-5 fw-semibold">Playstation 5</h3>
+                        <p>Prova un caricamento ultra rapido con un'unità SSD ad altissima velocità, un coinvolgimento ancora maggiore grazie al supporto per il feedback aptico1, ai grilletti adattivi1  e all'audio 3D* e scopri una nuovissima generazione di incredibili giochi PlayStation.</p>
+                    </div>
+                </div>
+                <div *ngIf="currentProductIndex === 1">
+                    <div class="w-75 mx-auto my-5">
+                        <h3 class="display-5 fw-semibold">iPhone 15</h3>
+                        <p>iPhone 15 Pro unisce potenza e raffinatezza in un design sorprendente. Offre prestazioni straordinarie e una qualità fotografica eccezionale. Il chip A16 Bionic, all'avanguardia nel settore, garantisce prestazioni rapide e efficienti, rendendo ogni attività fluida e reattiva.</p>
+                    </div>
+                </div>
+                <div *ngIf="currentProductIndex === 2">
+                    <div class="w-75 mx-auto my-5">
+                        <h3 class="display-5 fw-semibold">Rog Flow Z13</h3>
+                        <p>Asus ROG Zefifus: Potente, elegante e pronto per il gaming estremo. Dotato di CPU Ryzen 9 e GPU GeForce RTX, display 4K OLED, audio immersivo e tastiera retroilluminata RGB. Un'esperienza di gioco senza compromessi.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 d-flex flex-column pe-4">
+                <!-- Pulsanti per cambiare la visualizzazione del prodotto -->
+                <button class="mb-1 btn p-0 m-auto " (click)="changeProduct(0)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/PS5_logo.png/799px-PS5_logo.png" width="60px" alt="" ></button>
+                <button class="mb-1 btn p-0 m-auto bg-white" (click)="changeProduct(1)"><img src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/102019/captura_de_pantalla_2019-10-22_a_las_12.41.43_0.png?7cN1v3.L4Qg.9aBBmq3j.jxiFgq3NAdj&itok=NnIyx71k" width="60px" alt="" ></button>
+                <button class="mb-1 btn p-0 m-auto bg-white" (click)="changeProduct(2)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/ASUS_ROG_logo.svg/416px-ASUS_ROG_logo.svg.png" width="50px" alt="" ></button>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h4>Categorie in primo piano</h4>
+        <div class="row mt-4">
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/laptop']" routerLinkActive="router-link-active" >
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://www.aranzulla.it/wp-content/contenuti/2019/07/54d0411a-1-1200x628.jpg"  alt="apple" style="width: 10rem; height: 6.7rem;" >
+                    </div>
+                    <p>Computer</p>
+                </a>
+            </div>
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/phone']" routerLinkActive="router-link-active" >
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://immagini.trovaprezzi.it/guide-acquisto/3532/migliori_smartphone_cinesi.jpg"  alt="apple" style="width: 10rem; height: 6.7rem;" >
+                    </div>
+                    <p>Telefonia</p>
+                </a>
+            </div>
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/videogames']" routerLinkActive="router-link-active" > 
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://immagini.qualescegliere.it/articoli/2016/12/console.jpg"  alt="apple" style="width: 10rem; height: 6.7rem;">
+                    </div>
+                    <p>Console/Videogiochi</p>
+                </a>
+            </div>
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/lavatrici']" routerLinkActive="router-link-active" >
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://www.immobiliare.it/news/app/uploads/2022/07/Elettrodomestici.jpeg"  alt="apple" style="width: 10rem;" >
+                    </div>
+                    <p>Elettrodomestici</p>
+                </a>
+            </div>
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/fotocamere']" routerLinkActive="router-link-active" > 
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://i0.wp.com/fotografinviaggio.it/wp-content/uploads/2023/04/image2-15.jpg?resize=1000%2C666"  alt="apple" style="width: 10rem;">
+                    </div>
+                    <p>Foto / Video</p>
+                </a>
+               
+            </div>
+            <div class="col-2 text-center me-3" style="width: 11.6rem;">
+                <a [routerLink]="['/droni']" routerLinkActive="router-link-active" >
+                    <div class="border rounded-2 text-center m-auto brand ">
+                        <img src="https://attrezzaturavideomaking.it/wp-content/uploads/2021/06/migliori-droni-riprese.jpeg"  alt="apple" style="width: 10rem;"  >
+                    </div>
+                    <p>Droni</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h4>I nostri migliori brand</h4>
+        <div class="row mt-4">
+        
+            <div class="col-2" style="width: 13rem;">
+                <div class="border rounded-2 text-center m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/5VyZz5DSDF5tcHIGOR6Uyg/442e9db924616be93040c01346d1fed9/apple.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            <div class="col-2" style="width: 13rem;">
+                <div class="border rounded-2 text-center m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/2HvNQbEPIenek7UZFc2Akg/da60897de958036fcabc96cc22d33756/playstation.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            <div class="col-2" style="width: 13rem;">
+                <div class="border rounded-2 text-center m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/27cgC0xa6mxNjE7SsiROkb/73250a6f0e552ebee42e41986ed0daab/samsung-home.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            <div class="col-2" style="width: 13rem;">
+                <div class="border rounded-2 text-center m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/1vJifheNb9IcdAGJgMcJtQ/f1ffbecee3727e83dbc37e7d16513a29/intel.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            <div class="col-2" style="width: 13rem;">
+                <div class="border rounded-2 text-center m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/3FeP6mX7nvicgeLbr1hByf/4c2d2bab729cb6b9f42c50a744e91b56/xiaomi.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            <div class="col-2" style="width: 13rem;">
+                <div class="border text-center rounded-2 m-auto brand py-3 px-1">
+                    <img src="https://cms-images.mmst.eu/hzxov1nxpus5/ekGcQ5eWTUQ9Gg8fs83kb/eb20d28465143e3f6ccde36534d95632/sony.jpg?w=250&h=80&q=80"  alt="apple" style="width: 10rem;" class=" " >
+                </div>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+

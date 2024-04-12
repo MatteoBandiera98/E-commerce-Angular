@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close(null)"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+        <label for="nickname" class="form-label">Nickname:</label>
+        <input type="text" class="form-control" [(ngModel)]="nickname" name="nickname" id="nickname" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close(null)">
+      Chiudi
+    </button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.close({nickname: nickname})">Salva</button>
+  </div>

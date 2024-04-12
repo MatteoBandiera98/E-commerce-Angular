@@ -1,0 +1,13 @@
+<div class="container py-3">
+    <h3>Grazie per esserti registrato</h3>
+    <div class="form-group" *ngIf="userData as user">
+        <p class="text-center">Abbiamo inviato una mail di conferma a <strong>{{user.email}}</strong>.</p>
+        <p class="text-center">Controlla la tua email e clicca sul link per verificare la tua email.</p>
+    </div>
+    <div class="form-group my-2">
+        <button type="button" class="btn btn-secondary" (click)="authSrv.verificateMail()">Rimanda Verifica Email</button>
+    </div>
+    <div class="my-2">
+        <span routerLink="/login">Torna al Log-In</span>
+    </div>
+</div>

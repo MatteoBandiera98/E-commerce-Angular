@@ -1,0 +1,388 @@
+<nav class="navbar navbar-expand-lg navbar-light" data-mdb-theme="dark">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" routerLink="/">
+        <img
+          src="https://cdn.discordapp.com/attachments/1220804183771316344/1227977715743723571/2.png?ex=662a5e5e&is=6617e95e&hm=674194594652df38d10502989c4cc9fbbec4e09ac7fe704e6ea8a3be1e9fdce1&"
+          height="70px"
+          alt="MDB Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <div mdbDropdown class="dropdown">
+        <a
+              class="text-reset me-3"
+              mdbDropdownToggle
+              aria-expanded="false"
+              data-mdb-display="static"
+              id="cartDropDown"
+            >
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+        <section class="dropdown-menu dropdown-menu-end" style="width: 52vw; zoom: 0.7;" aria-labelledby="cartDropDown" mdbDropdownMenu>
+          <div
+            class="d-flex justify-content-between align-items-center position-sticky top-0 start-0 bg-light text-center p-3" style="z-index: 10000;"
+          >
+            <h3 class="fw-normal mb-0 text-warning">Shopping Cart</h3>
+          </div>
+          <div
+            id="cart"
+            class="container shopping-cart"
+            style="max-height: 50vh; overflow-y: scroll"
+          >
+            <div
+              class="row d-flex justify-content-center align-items-center h-100"
+            >
+              <div class="col-10">
+  
+                <div class="card rounded-3 mb-4" *ngFor="let product of cart; let i = index">
+                  <div class="card-body p-4">
+                    <div
+                      class="row d-flex justify-content-between align-items-center"
+                    >
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          [src]="product.imgUrl"
+                          class="img-fluid rounded-3"
+                          [alt]="product.title"
+                        />
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">{{product.title}}</p>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                          (click)="removeFromCart(product)"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+  
+                        <input
+                          id="form{{i}}"
+                          min="1"
+                          name="quantity"
+                          [value]="product.quantity || 0"
+                          [(ngModel)]="selectQuantity[i]"
+                          (keyup)="enforceMinMax(i)"
+                          type="number"
+                          class="form-control form-control-sm"
+                          style="width: 45px;"
+                        />
+  
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                          (click)="addToCart(product)"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h5 class="mb-0 small-text">{{(product.price * product.quantity) | number}}</h5>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a class="text-danger"
+                          ><i class="fas fa-trash fa-lg"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- <div class="card rounded-3 mb-4">
+                  <div class="card-body p-4">
+                    <div
+                      class="row d-flex justify-content-between align-items-center"
+                    >
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                          class="img-fluid rounded-3"
+                          alt="Cotton T-shirt"
+                        />
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                        <p>
+                          <span class="text-muted">Size: </span>M
+                          <span class="text-muted">Color: </span>Grey
+                        </p>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+  
+                        <input
+                          id="form1"
+                          min="0"
+                          name="quantity"
+                          value="2"
+                          type="number"
+                          class="form-control form-control-sm"
+                        />
+  
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h5 class="mb-0 small-text">$499.00</h5>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a href="#!" class="text-danger"
+                          ><i class="fas fa-trash fa-lg"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card rounded-3 mb-4">
+                  <div class="card-body p-4">
+                    <div
+                      class="row d-flex justify-content-between align-items-center"
+                    >
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                          class="img-fluid rounded-3"
+                          alt="Cotton T-shirt"
+                        />
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                        <p>
+                          <span class="text-muted">Size: </span>M
+                          <span class="text-muted">Color: </span>Grey
+                        </p>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+  
+                        <input
+                          id="form1"
+                          min="0"
+                          name="quantity"
+                          value="2"
+                          type="number"
+                          class="form-control form-control-sm"
+                        />
+  
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h5 class="mb-0 small-text">$499.00</h5>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a href="#!" class="text-danger"
+                          ><i class="fas fa-trash fa-lg"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card rounded-3 mb-4">
+                  <div class="card-body p-4">
+                    <div
+                      class="row d-flex justify-content-between align-items-center"
+                    >
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                          class="img-fluid rounded-3"
+                          alt="Cotton T-shirt"
+                        />
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                        <p>
+                          <span class="text-muted">Size: </span>M
+                          <span class="text-muted">Color: </span>Grey
+                        </p>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+  
+                        <input
+                          id="form1"
+                          min="0"
+                          name="quantity"
+                          value="2"
+                          type="number"
+                          class="form-control form-control-sm"
+                        />
+  
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h5 class="mb-0 small-text">$499.00</h5>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a href="#!" class="text-danger"
+                          ><i class="fas fa-trash fa-lg"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+  
+                <!-- <div class="card mb-4">
+                  <div class="card-body p-4 d-flex flex-row">
+                    <div data-mdb-input-init class="form-outline flex-fill">
+                      <input
+                        type="text"
+                        id="form1"
+                        class="form-control form-control-lg"
+                      />
+                      <label class="form-label" for="form1"
+                        >Discound code</label
+                      >
+                    </div>
+                    <button
+                      type="button"
+                      data-mdb-button-init
+                      data-mdb-ripple-init
+                      class="btn btn-outline-warning btn-lg ms-3"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="card position-sticky bottom-0 start-0">
+            <div class="card-body">
+              <button
+                type="button"
+                data-mdb-button-init
+                data-mdb-ripple-init
+                class="btn btn-warning btn-block btn-lg"
+              >
+                Procedi al pagamento
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Avatar -->
+      <div mdbDropdown class="dropdown">
+        <a
+          mdbDropdownToggle
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          aria-expanded="false"
+        >
+          <span class="rounded-circle d-flex justify-content-center align-items-center" style="width: 25px;height: 25px;">
+            <i loading="lazy" class="fa-solid fa-user" *ngIf="!logged || logged && user && !user.photoURL"></i>
+          </span>
+          <img
+            src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+            *ngIf="logged && user && user.photoURL"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+          mdbDropdownMenu
+        >
+          <li *ngIf="!logged">
+            <a class="dropdown-item" [routerLink]="['/login']">Login</a>
+          </li>
+          <li *ngIf="!logged">
+            <a class="dropdown-item" [routerLink]="['/register']">Register</a>
+          </li>
+          <li *ngIf="logged">
+            <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+          </li>
+          <li *ngIf="logged">
+            <a class="dropdown-item" href="javascript:void(0)" (click)="authSrv.logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>

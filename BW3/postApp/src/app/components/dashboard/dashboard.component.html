@@ -1,0 +1,32 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col-12 d-flex flex-row">
+      <div class="col-1"></div>
+      <div class="col-5" style="height: 400px;">
+        <img *ngIf="user.photoURL"
+          [src]="user.photoURL"
+          width="200px"
+          alt=""
+        />
+      </div>
+      <div class="col-5">
+        <ul>
+          <li><strong>Nickname: </strong>{{user.displayName}}</li>
+          <li><strong>Email: </strong>{{user.email}}</li>
+          <li><strong>Email Verificata: </strong><i *ngIf="user.emailVerified" class="fa-solid fa-circle-check text-success"></i><i class="fa-solid fa-circle-xmark text-danger" *ngIf="!user.emailVerified"></i></li>
+        </ul>
+        <hr>
+        <button class="btn btn-danger" (click)="cambiaPassword()">Cambia Password</button>
+        <button class="btn btn-success" (click)="cambiaNickname()">Cambia Nickname</button>
+        <button class="btn btn-primary" (click)="cambiaFotoProfilo()">Cambia Foto Profilo</button>
+      </div>
+      <div class="col-1"></div>
+    </div>
+</div>
+<hr>
+<h2>PREFERITI</h2>
+<div class="row">
+    <app-card [item]="fav" *ngFor="let fav of user.favorites" class="col-3"></app-card>
+
+</div>
+</div>
